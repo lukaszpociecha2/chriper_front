@@ -11,6 +11,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { LoginComponent } from './login/login.component';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { MessagesComponent } from './messages/messages.component';
+import { CommentComponent } from './comment/comment.component';
 
 
 
@@ -23,6 +24,7 @@ import { MessagesComponent } from './messages/messages.component';
     NavbarComponent,
     LoginComponent,
     MessagesComponent,
+    CommentComponent,
   ],
   imports: [
     BrowserModule,

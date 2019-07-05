@@ -16,7 +16,8 @@ export class DataService {
     headers: new HttpHeaders({ 
       'Access-Control-Allow-Origin':'*',
       'Access-Control-Allow-Methods' : 'POST',
-      'Access-Control-Allow-Credentials': 'true'
+      'Access-Control-Allow-Credentials': 'true',
+      'Authorization' : localStorage.getItem('token')
     })
   };
    
@@ -24,13 +25,14 @@ export class DataService {
 
   getAll(){
     return this.http.get<any>(this.url, {
-      // headers: new HttpHeaders({ 
+      headers: new HttpHeaders({ 
       //   'Access-Control-Allow-Origin':'*',
       //   'Access-Control-Allow-Methods' : 'POST',
       //   'Access-Control-Allow-Credentials': 'true'
-      // }),
+      'Authorization' : localStorage.getItem('token')
+      }),
       observe: "response",
-      responseType: "json"
+      responseType: "json",
     }).pipe(catchError((error : HttpErrorResponse) => {
           return this.handleError(error);
     }));
@@ -38,11 +40,12 @@ export class DataService {
 
   update(resource){
     //return this.http.put(this.url + '/' + post.id, JSON.stringify(post));// update całego obiektu
-    return this.http.patch(this.url + '/' + resource.id
+    return this.http.put(this.url
     , resource, {headers: new HttpHeaders({ 
       'Access-Control-Allow-Origin':'*',
       'Access-Control-Allow-Methods' : 'POST',
-      'Access-Control-Allow-Credentials': 'true'
+      'Access-Control-Allow-Credentials': 'true',
+      'Authorization' : localStorage.getItem('token')
     })}); 
   }
 
@@ -52,7 +55,8 @@ export class DataService {
           , { headers: new HttpHeaders({ 
           'Access-Control-Allow-Origin':'*',
           'Access-Control-Allow-Methods' : 'OPTIONS, POST, GET',
-          'Access-Control-Allow-Credentials': 'true'
+          'Access-Control-Allow-Credentials': 'true',
+          'Authorization' : localStorage.getItem('token')
         })}).pipe(catchError( (error : HttpErrorResponse) => {
           return this.handleError(error);     
         }));
@@ -60,15 +64,16 @@ export class DataService {
 
   delete(id){
         
-        return this.http.delete(this.url + '/' + id, {headers: new HttpHeaders({ 
+        return this.http.delete(this.url + '/' + id
+        , { headers: new HttpHeaders({ 
           'Access-Control-Allow-Origin':'*',
-          'Access-Control-Allow-Methods' : 'POST',
-          'Access-Control-Allow-Credentials': 'true'
-        }),})
-                .pipe(catchError( ( error : HttpErrorResponse) => {
-                  return this.handleError(error);
-                }));
-            }
+          'Access-Control-Allow-Methods' : 'OPTIONS, POST, GET',
+          'Access-Control-Allow-Credentials': 'true',
+          'Authorization' : localStorage.getItem('token')
+        })}).pipe(catchError( (error : HttpErrorResponse) => {
+          return this.handleError(error);     
+        }));
+  }
   
 
   handleError(error : HttpErrorResponse){

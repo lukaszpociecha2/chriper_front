@@ -1,48 +1,34 @@
-<!-- <<div class="tweets">
-    <div class="media">
-        <img src="" class="align-self-start mr-3" alt="...">
-        <div class="media-body">
-                <p style="width: 50%; float: left" class="tweet-header author">Author Name</p>
-                <p style="width: 50%; float: right" class="tweet-header created">Created on ...</p>
-                <h5 class="mt-0"></h5>
-            <p style="font-style: oblique">Twitt title.</p>
-            <p style="font-size: 14px">Donec sed odio dui. Nullam quis risus eget urna mollis ornare vel eu leo. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
-            <button class="btn btn-primary" (click)="toggleComment()">Comment</button>
-            <div *ngIf="commentActive">
-                <form>
-                    <input type="textarea" rows="3"/>
-                    <button>Submit</button>
-                </form>
-            </div>
-            <p></p>
-            <div *ngIf="hasComments" style="border: 1px grey solid">
-                <p style="float : left"><a href="#">Comment Author</a></p>
-                <p style="float : right; font-size: 10px">Comment created</p>
-                <p style="clear:both">Comment text</p>
-            </div>
-        </div>
-    </div>
+<div style="padding: 10px">
+
+<div>
+    <input type="textarea" maxlength="160" #newTweet/>
+    <button (click)="addTweet(newTweet)">Chirp</button>
 </div>
-<div class="tweets">
-    <div class="media">
-        <img src="" class="align-self-start mr-3" alt="...">
-        <div class="media-body">
-                <p style="width: 50%; float: right" class="tweet-header author">Author Name</p>
-                <p style="width: 50%; float: right" class="tweet-header created">Created on ...</p>
-                <h5 class="mt-0"></h5>
-            <p style="font-style: oblique">Twitt title.</p>
-            <p style="font-size: 14px">Donec sed odio dui. Nullam quis risus eget urna mollis ornare vel eu leo. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
+
+<ul *ngIf="tweets">
+    <li *ngFor="let tweet of tweets">
+        <div><span><a href="/message/send/">{{tweet.user.firstName}}</a></span>{{tweet.created | date : "medium" }}</div>
+        <div style="border: 1px black solid; padding: 2px;">{{tweet.text}}</div>
+
+        <div *ngIf="editActive">
+            <input #editedTweet type="textarea" value="{{tweet.text}}">
+            <button (click)="editTweet(editedTweet, tweet)">Submit</button>
         </div>
-    </div>
-</div> -->
-<ul>
-    <li>
-        <div><span>Title</span>Created on</div>
-        <div>Textttttttttttttttttttttttttttttttttttt</div>
-        <div *ngIf="commentActive">
-            <input type="textarea" placeholder="comment">
-            <button>Submit</button>
+    
+        <button (click)="toggleComment($event, tweet)">Comment</button>
+        <button (click)="editActive=!editActive">Edit</button>
+        <button (click)="delete(tweet)">Delete</button>
+            <!-- COMMENT COMPONENT -->
+
+            <comment  [tweetId]="tweetId" [commentActive]="commentActive"></comment>
+        <div *ngIf="tweet.comments">
+            <ul>
+                <li *ngFor="let comment of tweet.comments">
+                    {{comment.text}}
+                </li>
+            </ul>
         </div>
-        <button (click)="toggleComment()">Comment</button>
     </li>
 </ul>
+</div>
+<div *ngIf="!tweets">No tweets at this time.</div>

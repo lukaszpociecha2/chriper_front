@@ -1,0 +1,4 @@
+<div *ngIf="commentActive">
+    <input #comment name="input" type="textarea" placeholder="comment">
+    <button (click)="sendComment(comment.value) ">Submit</button>
+</div>
