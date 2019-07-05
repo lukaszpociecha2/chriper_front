@@ -1,0 +1,16 @@
+.tweets {
+    border: 1px grey solid;
+    padding: 10px;
+    margin: 5% 5% 5% 5%;
+}
+
+.tweet-header .author {
+    /* display: inline; */
+    width: 50%;
+    float: right;
+}
+.tweet-header .created {
+    /* display: inline; */
+    width: 50%;
+    float: right;
+}

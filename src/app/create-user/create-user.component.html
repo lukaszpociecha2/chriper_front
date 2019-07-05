@@ -1,0 +1,35 @@
+<div style="width: 50%; border: 1px gray solid; padding: 10px; margin: 10px">
+    <form #f="ngForm" (ngSubmit)="submitUser(f)">
+        <div class="form-group">
+            <label for="firstName">First Name</label>
+            <input required id="firstName" ngModel name="firstName" #firstName="ngModel" type="text" class="form-control">
+            <div class="alert alert-danger" *ngIf="firstName.touched && !firstName.valid">Field cannot be empty.</div> 
+        </div>
+        <div class="form-group">
+            <label for="lastName">Last Name</label>
+            <input required id="lastName" ngModel name="lastName" #lastName="ngModel" type="text" class="form-control">
+            <div class="alert alert-danger" *ngIf="lastName.touched && !lastName.valid">Field cannot be empty.</div> 
+        </div>
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input required pattern=".+@.+" id="email" ngModel name="email" type="email" #email="ngModel" class="form-control" (change)="checkEmail(email.value)">
+                <div *ngIf="emailAlreadyExists" class="alert alert-danger">Email already exists.</div> 
+            <div *ngIf="email.touched && !email.valid">
+               <div class="alert alert-danger" *ngIf="email.errors.required">Field cannot be empty.</div>
+               <div class="alert alert-danger" *ngIf="email.errors.pattern">Enter correct email.</div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input required id="password" ngModel name="password" #password="ngModel" type="password" class="form-control" (keyup)="pass1(password)">
+            <div class="alert alert-danger" *ngIf="password.touched && !password.valid">Field cannot be empty.</div>
+        </div>
+        <div class="form-group">
+            <label for="password2">Repeat password</label>
+            <input required id="password2" ngModel name="password2" #password2="ngModel" type="password" class="form-control" (keyup)="pass2(password2)">
+            <div *ngIf="pass!==pass_repeat" class="alert alert-danger">Password must be the same.</div>
+        <button type="submit" class="btn btn-primary" [disabled]="!f.valid || pass!==pass_repeat || emailAlreadyExists">Submit</button>
+        </div>
+    </form>
+    <p></p>
+    </div>

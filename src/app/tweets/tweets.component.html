@@ -1,0 +1,48 @@
+<!-- <<div class="tweets">
+    <div class="media">
+        <img src="" class="align-self-start mr-3" alt="...">
+        <div class="media-body">
+                <p style="width: 50%; float: left" class="tweet-header author">Author Name</p>
+                <p style="width: 50%; float: right" class="tweet-header created">Created on ...</p>
+                <h5 class="mt-0"></h5>
+            <p style="font-style: oblique">Twitt title.</p>
+            <p style="font-size: 14px">Donec sed odio dui. Nullam quis risus eget urna mollis ornare vel eu leo. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
+            <button class="btn btn-primary" (click)="toggleComment()">Comment</button>
+            <div *ngIf="commentActive">
+                <form>
+                    <input type="textarea" rows="3"/>
+                    <button>Submit</button>
+                </form>
+            </div>
+            <p></p>
+            <div *ngIf="hasComments" style="border: 1px grey solid">
+                <p style="float : left"><a href="#">Comment Author</a></p>
+                <p style="float : right; font-size: 10px">Comment created</p>
+                <p style="clear:both">Comment text</p>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="tweets">
+    <div class="media">
+        <img src="" class="align-self-start mr-3" alt="...">
+        <div class="media-body">
+                <p style="width: 50%; float: right" class="tweet-header author">Author Name</p>
+                <p style="width: 50%; float: right" class="tweet-header created">Created on ...</p>
+                <h5 class="mt-0"></h5>
+            <p style="font-style: oblique">Twitt title.</p>
+            <p style="font-size: 14px">Donec sed odio dui. Nullam quis risus eget urna mollis ornare vel eu leo. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
+        </div>
+    </div>
+</div> -->
+<ul>
+    <li>
+        <div><span>Title</span>Created on</div>
+        <div>Textttttttttttttttttttttttttttttttttttt</div>
+        <div *ngIf="commentActive">
+            <input type="textarea" placeholder="comment">
+            <button>Submit</button>
+        </div>
+        <button (click)="toggleComment()">Comment</button>
+    </li>
+</ul>
