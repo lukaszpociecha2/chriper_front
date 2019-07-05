@@ -19,6 +19,14 @@ export class SignInService extends DataService {
       return this.http.post(this.localUrl, credentials).pipe(map(
         response=> {
           console.log(response);
+          console.log(response.accessToken);
+          console.log(response.tokenType);
+          console.log(response.value);
+          let token : string = response.tokenType + ' ' + response.accessToken;
+          if(response.accessToken){
+            localStorage.setItem("token", token);
+          }
+          
           
         }
       ));
